@@ -516,9 +516,9 @@ def main():
                         # Display preview
                         col_prev1, col_prev2 = st.columns(2)
                         with col_prev1:
-                            st.image(processed_image, caption="Processed Image", use_container_width=True)
+                            st.image(processed_image, caption="Processed Image", use_column_width=True)
                         with col_prev2:
-                            st.image(preview_img, caption=f"Vector Preview: {len(contours)} contours", use_container_width=True)
+                            st.image(preview_img, caption=f"Vector Preview: {len(contours)} contours", use_column_width=True)
                         
                         st.success(f"✅ Preview generated with {len(contours)} contours at detail level {detail_level}")
                         
@@ -528,7 +528,7 @@ def main():
                         if os.path.exists(tmp_path):
                             os.unlink(tmp_path)
             
-            if st.button("Generate Vector File(s)", key="vector_btn", use_container_width=True):
+            if st.button("Generate Vector File(s)", key="vector_btn"):
                 with st.spinner("Processing image..."):
                     file_extension = os.path.splitext(original_filename)[1].lower()
                     if file_extension == '':
@@ -648,9 +648,9 @@ def main():
         if st.session_state.vector_result:
             result = st.session_state.vector_result
             
-            # Display preprocessing results - FIXED: use_container_width
+            # Display preprocessing results - FIXED: use_column_width
             if result.get('preprocessing_viz') and os.path.exists(result['preprocessing_viz']):
-                st.image(result['preprocessing_viz'], caption="Processing Steps", use_container_width=True)
+                st.image(result['preprocessing_viz'], caption="Processing Steps", use_column_width=True)
             
             # Display download options
             if result.get('multiple_files', False):
@@ -671,7 +671,6 @@ def main():
                                     data=file,
                                     file_name=download_filename,
                                     mime="image/svg+xml",
-                                    use_container_width=True,
                                     key=f"download_svg_multi_{i}"
                                 )
                                 st.caption(f"Stroke: {stroke_size}px")
@@ -697,7 +696,6 @@ def main():
                                         data=file,
                                         file_name=download_filename,
                                         mime="application/illustrator",
-                                        use_container_width=True,
                                         key=f"download_ai_multi_{i}"
                                     )
                                     st.caption("For professional editing in Adobe Illustrator")
@@ -723,7 +721,6 @@ def main():
                                 data=file,
                                 file_name=download_filename,
                                 mime="image/svg+xml",
-                                use_container_width=True,
                                 key="download_svg_single"
                             )
                         st.caption("This SVG file can be used directly with embroidery machines")
@@ -746,7 +743,6 @@ def main():
                                         data=file,
                                         file_name=download_filename,
                                         mime="application/illustrator",
-                                        use_container_width=True,
                                         key="download_ai_single"
                                     )
                                 st.caption("Open in Adobe Illustrator - design will be centered")
